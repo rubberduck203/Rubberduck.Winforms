@@ -45,6 +45,9 @@
     <Compile Include="ErrorLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Label.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ModelBoundForm.cs">
       <SubType>Form</SubType>
     </Compile>

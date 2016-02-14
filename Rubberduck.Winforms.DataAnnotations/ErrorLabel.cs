@@ -1,35 +1,26 @@
 using System.Drawing;
-using System.Windows.Forms;
+using Forms = System.Windows.Forms;
 
 namespace Rubberduck.Winforms.DataAnnotations
 {
     public class ErrorLabel : Label
     {
         /// <summary>
-        /// Specifies where the <see cref="ErrorLabel"/> will be rendered in relation to the control that's being validated.
-        /// </summary>
-        public enum MessageAlignment
-        {
-            Right,
-            Bottom
-        }
-
-        /// <summary>
         /// Default padding around the ErrorLabel in Pixels.
         /// </summary>
         public new const int DefaultPadding = 10;
 
-        public static ErrorLabel For(Control control)
+        public static new ErrorLabel For(Forms.Control control)
         {
-            return ErrorLabel.For(control, MessageAlignment.Right);
+            return ErrorLabel.For(control, Alignment.Right);
         }
 
-        public static ErrorLabel For(Control control, MessageAlignment alignment)
+        public static ErrorLabel For(Forms.Control control, Alignment alignment)
         {
             return ErrorLabel.For(control, alignment, DefaultPadding);
         }
 
-        public static ErrorLabel For(Control control, MessageAlignment alignment, int padding)
+        public static ErrorLabel For(Forms.Control control, Alignment alignment, int padding)
         {
             var errorLabel = new ErrorLabel(control)
             {
@@ -40,10 +31,11 @@ namespace Rubberduck.Winforms.DataAnnotations
 
             switch (alignment)
             {
-                case MessageAlignment.Right:
+                case Alignment.Right:
                     errorLabel.Location = new Point(control.Width + control.Location.X + padding, control.Location.Y);
                     break;
-                case MessageAlignment.Bottom:
+                case Alignment.Bottom:
+                    // Adding to Y moved the label DOWN the screen.
                     errorLabel.Location = new Point(control.Location.X, control.Location.Y + control.Height + padding);
                     break;
             }
@@ -55,16 +47,19 @@ namespace Rubberduck.Winforms.DataAnnotations
 
         // Don't allow anyone to directly create an Error label, force them through the factory methods
         // so that we don't have to deal with calling virtual members in the ctor
-        private ErrorLabel(Control control)
-        {
-            _control = control;
-        }
+        private ErrorLabel(Forms.Control control)
+            :base(control)
+        { }
+    }
 
-        private readonly Control _control;
-
-        /// <summary>
-        /// The control that this ErrorLabel is bound to and will show validation messages for.
-        /// </summary>
-        public Control Control { get { return _control; } }
+    /// <summary>
+    /// Specifies where the <see cref="ErrorLabel"/> will be rendered in relation to the control that's being validated.
+    /// </summary>
+    public enum Alignment
+    {
+        Top,
+        Bottom,
+        Right,
+        Left
     }
 }

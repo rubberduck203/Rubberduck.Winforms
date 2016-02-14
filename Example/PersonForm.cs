@@ -16,8 +16,13 @@ namespace Example
             FirstNameInput.DataBindings.Add(new TextBinding(this.Model, "FirstName"));
             
             // Register the error label for the input control
+            Register(Label.For(FirstNameInput));
             Register(ErrorLabel.For(FirstNameInput));
-            //Register(ErrorLabel.For(FirstNameInput, ErrorLabel.MessageAlignment.Bottom));
+            //Register(ErrorLabel.For(FirstNameInput, Alignment.Bottom));
+
+            LastNameInput.DataBindings.Add(new TextBinding(this.Model, "LastName"));
+            Register(Label.For(LastNameInput));
+            Register(ErrorLabel.For(LastNameInput));
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)

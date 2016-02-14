@@ -6,12 +6,14 @@ namespace Example
 {
     public class Person : INotifyPropertyChanged
     {
+        private string _firstName;
+        private string _lastName;
+
         public Person()
         {
             _firstName = String.Empty;
+            _lastName = String.Empty;
         }
-        
-        private string _firstName;
 
         [Required]
         [RegularExpression("\\D+", ErrorMessage = "Cannot contains numbers")]
@@ -23,6 +25,19 @@ namespace Example
             {
                 _firstName = value;
                 InvokePropertyChanged("FirstName");
+            }
+        }
+
+        [Required]
+        [RegularExpression("\\D+", ErrorMessage = "Cannot contains numbers")]
+        [Display(Name = "Last Name")]
+        public string LastName
+        {
+            get { return _lastName; }
+            set
+            {
+                _lastName = value;
+                InvokePropertyChanged("LastName");
             }
         }
 

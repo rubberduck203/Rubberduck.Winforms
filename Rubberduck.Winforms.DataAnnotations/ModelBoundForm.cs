@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Rubberduck.Winforms.DataAnnotations
@@ -21,11 +22,12 @@ namespace Rubberduck.Winforms.DataAnnotations
         }
 
         private readonly Dictionary<string, ErrorLabel> _errorLabels = new Dictionary<string, ErrorLabel>();
+        private readonly Dictionary<string, Label> _labels = new Dictionary<string, Label>();
 
         /// <summary>
         /// The view model. It must implement INotifyPropertyChanged for validation to work correctly.
         /// </summary>
-        public Object Model { get; set; }
+        public object Model { get; set; }
 
         protected void Register(ErrorLabel errorLabel)
         {
@@ -34,6 +36,22 @@ namespace Rubberduck.Winforms.DataAnnotations
 
             //todo: I don't care for this much. Add support for other types of input
             errorLabel.Control.Validating += (sender, args) => ValidateControl(errorLabel.Control, "Text");
+        }
+
+        protected void Register(Label label)
+        {
+            _labels.Add(label.Control.Name, label);
+            Controls.Add(label);
+
+            //todo: again, add support for other types of input
+            var boundField = GetBoundField(label.Control, "Text");
+                
+            var attribute = this.Model.GetType()
+                .GetProperty(boundField)
+                .GetCustomAttributes(typeof(DisplayAttribute), false)
+                .FirstOrDefault();
+
+            label.Text = (attribute == null) ? boundField : ((DisplayAttribute) attribute).Name;
         }
 
         /// <summary>
@@ -59,31 +77,13 @@ namespace Rubberduck.Winforms.DataAnnotations
                 throw new ArgumentNullException("control");
             }
 
-            if (controlProperty == null)
-            {
-                throw new ArgumentNullException("controlProperty");
-            }
-
             ErrorLabel errorLabel;
             if (!_errorLabels.TryGetValue(control.Name, out errorLabel))
             {
                 throw new InvalidOperationException("Unable to retrieve ErrorLabel for control " + control.Name);
             }
 
-            ControlBindingsCollection bindings = control.DataBindings;
-
-            if (bindings.Count <= 0)
-            {
-                throw new InvalidOperationException("There are no bindings for " + control.Name + ".");
-            }
-
-            Binding binding = bindings[controlProperty];
-            if (binding == null)
-            {
-                throw new ArgumentException("No binding was set for " + control.Name + "." + controlProperty, "controlProperty");
-            }
-
-            string boundField = binding.BindingMemberInfo.BindingField;
+            string boundField = GetBoundField(control, controlProperty);
             var context = new ValidationContext(this.Model, null, null) { MemberName = boundField };
 
             object propertyValue = this.Model.GetType().InvokeMember(boundField, System.Reflection.BindingFlags.GetProperty, null, this.Model, null);
@@ -102,6 +102,34 @@ namespace Rubberduck.Winforms.DataAnnotations
 
             errorLabel.Text = validation.ErrorMessage;
             return false;
+        }
+
+        private static string GetBoundField(Control control, string controlProperty)
+        {
+            if (control == null)
+            {
+                throw new ArgumentNullException("control");
+            }
+
+            if (controlProperty == null)
+            {
+                throw new ArgumentNullException("controlProperty");
+            }
+
+            ControlBindingsCollection bindings = control.DataBindings;
+
+            if (bindings.Count <= 0)
+            {
+                throw new InvalidOperationException("There are no bindings for " + control.Name + ".");
+            }
+
+            Binding binding = bindings[controlProperty];
+            if (binding == null)
+            {
+                throw new ArgumentException("No binding was set for " + control.Name + "." + controlProperty, "controlProperty");
+            }
+
+            return binding.BindingMemberInfo.BindingField;
         }
     }
 }

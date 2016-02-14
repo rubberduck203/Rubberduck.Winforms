@@ -28,19 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblFirstName = new System.Windows.Forms.Label();
             this.FirstNameInput = new System.Windows.Forms.TextBox();
             this.SubmitButton = new System.Windows.Forms.Button();
+            this.LastNameInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // lblFirstName
-            // 
-            this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(84, 70);
-            this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(26, 13);
-            this.lblFirstName.TabIndex = 0;
-            this.lblFirstName.Text = "First";
             // 
             // FirstNameInput
             // 
@@ -59,13 +50,20 @@
             this.SubmitButton.UseVisualStyleBackColor = true;
             this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
+            // LastNameInput
+            // 
+            this.LastNameInput.Location = new System.Drawing.Point(87, 146);
+            this.LastNameInput.Name = "LastNameInput";
+            this.LastNameInput.Size = new System.Drawing.Size(100, 20);
+            this.LastNameInput.TabIndex = 3;
+            // 
             // PersonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(870, 443);
+            this.Controls.Add(this.LastNameInput);
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.FirstNameInput);
-            this.Controls.Add(this.lblFirstName);
             this.Name = "PersonForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -74,8 +72,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.TextBox FirstNameInput;
         private System.Windows.Forms.Button SubmitButton;
+        private System.Windows.Forms.TextBox LastNameInput;
     }
 }
