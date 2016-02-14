@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using Forms = System.Windows.Forms;
 
 namespace Rubberduck.Winforms.DataAnnotations
@@ -13,10 +10,15 @@ namespace Rubberduck.Winforms.DataAnnotations
 
         public static Label For(Forms.Control control)
         {
-           return Label.For(control, DefaultPadding);
+           return Label.For(control, Alignment.Top, DefaultPadding);
         }
 
-        public static Label For(Forms.Control control, int padding)
+        public static Label For(Forms.Control control, Alignment alignment)
+        {
+            return Label.For(control, alignment, DefaultPadding);
+        }
+
+        public static Label For(Forms.Control control, Alignment alignment, int padding)
         {
             var label = new Label(control)
             {
@@ -26,10 +28,29 @@ namespace Rubberduck.Winforms.DataAnnotations
 
             label.BringToFront();
 
-            // Subtracting actually moves the label UP the screen
-            label.Location = new Point(control.Location.X, control.Location.Y - control.Height - padding);
+            SetAlignment(label, control, alignment, padding);
 
             return label;
+        }
+
+        protected static void SetAlignment(Label label, Forms.Control control, Alignment alignment, int padding)
+        {
+            switch (alignment)
+            {
+                case Alignment.Top:
+                    // Subtracting actually moves the label UP the screen
+                    label.Location = new Point(control.Location.X, control.Location.Y - control.Height - padding);
+                    break;
+                case Alignment.Bottom:
+                    // Adding to Y moved the label DOWN the screen.
+                    label.Location = new Point(control.Location.X, control.Location.Y + control.Height + padding);
+                    break;
+                case Alignment.Right:
+                    label.Location = new Point(control.Width + control.Location.X + padding, control.Location.Y);
+                    break;
+                case Alignment.Left:
+                    throw new NotSupportedException("We've not added support for Left alignment yet.");
+            }
         }
 
         private readonly Forms.Control _control;
@@ -39,6 +60,9 @@ namespace Rubberduck.Winforms.DataAnnotations
         /// </summary>
         public Forms.Control Control { get { return _control; } }
 
+        // Don't allow anyone to directly create a label.
+        // Force them through the factory methods
+        // so that we don't have to deal with calling virtual members in the ctor.
         protected Label(Forms.Control control)
         {
             _control = control;

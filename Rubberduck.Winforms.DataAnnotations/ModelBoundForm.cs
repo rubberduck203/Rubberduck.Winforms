@@ -22,13 +22,16 @@ namespace Rubberduck.Winforms.DataAnnotations
         }
 
         private readonly Dictionary<string, ErrorLabel> _errorLabels = new Dictionary<string, ErrorLabel>();
-        private readonly Dictionary<string, Label> _labels = new Dictionary<string, Label>();
 
         /// <summary>
         /// The view model. It must implement INotifyPropertyChanged for validation to work correctly.
         /// </summary>
         public object Model { get; set; }
 
+        /// <summary>
+        /// Registers the <see cref="ErrorLabel"/> with the <see cref="ModelBoundForm"/> so that it may be displayed.
+        /// </summary>
+        /// <param name="errorLabel"></param>
         protected void Register(ErrorLabel errorLabel)
         {
             _errorLabels.Add(errorLabel.Control.Name, errorLabel);
@@ -38,9 +41,12 @@ namespace Rubberduck.Winforms.DataAnnotations
             errorLabel.Control.Validating += (sender, args) => ValidateControl(errorLabel.Control, "Text");
         }
 
+        /// <summary>
+        /// Registers the <see cref="Label"/> with the <see cref="ModelBoundForm"/> so that it may be displayed.
+        /// </summary>
+        /// <param name="label"></param>
         protected void Register(Label label)
         {
-            _labels.Add(label.Control.Name, label);
             Controls.Add(label);
 
             //todo: again, add support for other types of input
@@ -86,7 +92,7 @@ namespace Rubberduck.Winforms.DataAnnotations
             string boundField = GetBoundField(control, controlProperty);
             var context = new ValidationContext(this.Model, null, null) { MemberName = boundField };
 
-            object propertyValue = this.Model.GetType().InvokeMember(boundField, System.Reflection.BindingFlags.GetProperty, null, this.Model, null);
+            object propertyValue = this.Model.GetType().InvokeMember(boundField, BindingFlags.GetProperty, null, this.Model, null);
 
             var validationResults = new List<ValidationResult>();
             Validator.TryValidateProperty(propertyValue, context, validationResults);

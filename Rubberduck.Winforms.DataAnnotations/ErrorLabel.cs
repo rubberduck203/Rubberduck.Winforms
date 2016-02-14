@@ -15,12 +15,12 @@ namespace Rubberduck.Winforms.DataAnnotations
             return ErrorLabel.For(control, Alignment.Right);
         }
 
-        public static ErrorLabel For(Forms.Control control, Alignment alignment)
+        public static new ErrorLabel For(Forms.Control control, Alignment alignment)
         {
             return ErrorLabel.For(control, alignment, DefaultPadding);
         }
 
-        public static ErrorLabel For(Forms.Control control, Alignment alignment, int padding)
+        public static new ErrorLabel For(Forms.Control control, Alignment alignment, int padding)
         {
             var errorLabel = new ErrorLabel(control)
             {
@@ -29,16 +29,7 @@ namespace Rubberduck.Winforms.DataAnnotations
                 Visible = true
             };
 
-            switch (alignment)
-            {
-                case Alignment.Right:
-                    errorLabel.Location = new Point(control.Width + control.Location.X + padding, control.Location.Y);
-                    break;
-                case Alignment.Bottom:
-                    // Adding to Y moved the label DOWN the screen.
-                    errorLabel.Location = new Point(control.Location.X, control.Location.Y + control.Height + padding);
-                    break;
-            }
+            SetAlignment(errorLabel, control, alignment, padding);
 
             errorLabel.BringToFront();
 
@@ -50,16 +41,5 @@ namespace Rubberduck.Winforms.DataAnnotations
         private ErrorLabel(Forms.Control control)
             :base(control)
         { }
-    }
-
-    /// <summary>
-    /// Specifies where the <see cref="ErrorLabel"/> will be rendered in relation to the control that's being validated.
-    /// </summary>
-    public enum Alignment
-    {
-        Top,
-        Bottom,
-        Right,
-        Left
     }
 }
