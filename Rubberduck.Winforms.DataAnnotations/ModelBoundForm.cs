@@ -90,7 +90,8 @@ namespace Rubberduck.Winforms.DataAnnotations
             }
             else
             {
-                errorLabel = new ErrorLabel(control, errorMessage);
+                //todo: Give the user the ability to specify whether it goes to the right or below of the control being validated
+                errorLabel = ErrorLabel.For(control, errorMessage); 
 
                 _errorLabels.Add(boundField, errorLabel);
                 control.Parent.Controls.Add(errorLabel);
