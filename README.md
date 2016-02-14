@@ -17,8 +17,8 @@ It enables you to:
   
 ## Minimum System Requirements
 
-  - .Net Framework v4.0
-  - Windows XP
+  - .Net Framework v4.0 or greater
+  - Windows XP or greater
   
 ## Installing
 
