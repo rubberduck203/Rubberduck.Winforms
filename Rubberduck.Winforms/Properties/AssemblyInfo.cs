@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Rubberduck.Winforms")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("DataAnnotation and Validation Framework for Winforms")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Christopher J. McClellan")]
 [assembly: AssemblyProduct("Rubberduck.Winforms")]
 [assembly: AssemblyCopyright("Copyright © Christopher J. McClellan 2016")]
 [assembly: AssemblyTrademark("")]
