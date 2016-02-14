@@ -48,7 +48,6 @@
             this.FirstNameInput.Name = "FirstNameInput";
             this.FirstNameInput.Size = new System.Drawing.Size(100, 20);
             this.FirstNameInput.TabIndex = 1;
-            this.FirstNameInput.Validating += new System.ComponentModel.CancelEventHandler(this.FirstNameInput_Validating);
             // 
             // SubmitButton
             // 

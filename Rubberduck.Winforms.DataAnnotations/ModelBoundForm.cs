@@ -27,6 +27,15 @@ namespace Rubberduck.Winforms.DataAnnotations
         /// </summary>
         public Object Model { get; set; }
 
+        protected void Register(ErrorLabel errorLabel)
+        {
+            _errorLabels.Add(errorLabel.Control.Name, errorLabel);
+            Controls.Add(errorLabel);
+
+            //todo: I don't care for this much. Add support for other types of input
+            errorLabel.Control.Validating += (sender, args) => ValidateControl(errorLabel.Control, "Text");
+        }
+
         /// <summary>
         /// Validates the <paramref name="textBox"/>, displaying an <see cref="ErrorLabel"/> if the input is invalid.
         /// </summary>
@@ -45,6 +54,22 @@ namespace Rubberduck.Winforms.DataAnnotations
         /// <returns>True if valid. False if invalid.</returns>
         protected bool ValidateControl(Control control, string controlProperty)
         {
+            if (control == null)
+            {
+                throw new ArgumentNullException("control");
+            }
+
+            if (controlProperty == null)
+            {
+                throw new ArgumentNullException("controlProperty");
+            }
+
+            ErrorLabel errorLabel;
+            if (!_errorLabels.TryGetValue(control.Name, out errorLabel))
+            {
+                throw new InvalidOperationException("Unable to retrieve ErrorLabel for control " + control.Name);
+            }
+
             ControlBindingsCollection bindings = control.DataBindings;
 
             if (bindings.Count <= 0)
@@ -70,42 +95,13 @@ namespace Rubberduck.Winforms.DataAnnotations
 
             if (validation == null)
             {
-                // Input is valid, if any error labels exist, remove them.
-                RemoveErrorLabelFor(control, boundField);
+                //Input is valid
+                errorLabel.Text = String.Empty;
                 return true;
             }
 
-            AddErrorLabelFor(control, boundField, validation.ErrorMessage);
+            errorLabel.Text = validation.ErrorMessage;
             return false;
-        }
-
-        private void AddErrorLabelFor(Control control, string boundField, string errorMessage)
-        {
-            // We have to see if this failed validation last time so that we don't try to add it a second time.
-
-            ErrorLabel errorLabel;
-            if (_errorLabels.TryGetValue(boundField, out errorLabel))
-            {
-                errorLabel.Text = errorMessage;
-            }
-            else
-            {
-                //todo: Give the user the ability to specify whether it goes to the right or below of the control being validated
-                errorLabel = ErrorLabel.For(control, errorMessage); 
-
-                _errorLabels.Add(boundField, errorLabel);
-                control.Parent.Controls.Add(errorLabel);
-            }
-        }
-
-        private void RemoveErrorLabelFor(Control control, string boundField)
-        {
-            ErrorLabel errorLabel;
-            if (_errorLabels.TryGetValue(boundField, out errorLabel))
-            {
-                _errorLabels.Remove(boundField);
-                control.Parent.Controls.Remove(errorLabel);
-            }
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -20,21 +19,20 @@ namespace Rubberduck.Winforms.DataAnnotations
         /// </summary>
         public new const int DefaultPadding = 10;
 
-        public static ErrorLabel For(Control control, string errorMessage)
+        public static ErrorLabel For(Control control)
         {
-            return ErrorLabel.For(control, errorMessage, MessageAlignment.Right);
+            return ErrorLabel.For(control, MessageAlignment.Right);
         }
 
-        public static ErrorLabel For(Control control, string errorMessage, MessageAlignment alignment)
+        public static ErrorLabel For(Control control, MessageAlignment alignment)
         {
-            return ErrorLabel.For(control, errorMessage, alignment, DefaultPadding);
+            return ErrorLabel.For(control, alignment, DefaultPadding);
         }
 
-        public static ErrorLabel For(Control control, string errorMessage, MessageAlignment alignment, int padding)
+        public static ErrorLabel For(Control control, MessageAlignment alignment, int padding)
         {
-            var errorLabel = new ErrorLabel
+            var errorLabel = new ErrorLabel(control)
             {
-                Text = errorMessage,
                 ForeColor = Color.Red,
                 AutoSize = true,
                 Visible = true
@@ -57,6 +55,16 @@ namespace Rubberduck.Winforms.DataAnnotations
 
         // Don't allow anyone to directly create an Error label, force them through the factory methods
         // so that we don't have to deal with calling virtual members in the ctor
-        private ErrorLabel() { }
+        private ErrorLabel(Control control)
+        {
+            _control = control;
+        }
+
+        private readonly Control _control;
+
+        /// <summary>
+        /// The control that this ErrorLabel is bound to and will show validation messages for.
+        /// </summary>
+        public Control Control { get { return _control; } }
     }
 }
