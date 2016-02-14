@@ -1,6 +1,8 @@
 # Rubberduck.Winforms
 A DataAnnotations and Validation framework for Winforms
 
+  ![example ModelBoundForm](http://i.imgur.com/0wl4l4h.png)
+
 ## Mission Statement
 
 We all have legacy code. 
