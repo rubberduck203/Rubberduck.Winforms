@@ -14,15 +14,19 @@ namespace Example
 
             // Databind the Person.FirstName property to the FirstNameInput textbox
             FirstNameInput.DataBindings.Add(new TextBinding(this.Model, "FirstName"));
-            
-            // Register the error label for the input control
             Register(Label.For(FirstNameInput));
             Register(ErrorLabel.For(FirstNameInput));
-            //Register(ErrorLabel.For(FirstNameInput, Alignment.Bottom));
 
             LastNameInput.DataBindings.Add(new TextBinding(this.Model, "LastName"));
             Register(Label.For(LastNameInput));
             Register(ErrorLabel.For(LastNameInput));
+
+            //Works with ComboBoxes too!
+            AgeInput.DataBindings.Add(new TextBinding(this.Model, "Age"));
+            //Put the label to the right of the input control.
+            Register(Label.For(AgeInput, Alignment.Right)); 
+            //Put the validation message under the control, with a little extra padding.
+            Register(ErrorLabel.For(AgeInput, Alignment.Bottom, ErrorLabel.DefaultPadding + 5)); 
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)

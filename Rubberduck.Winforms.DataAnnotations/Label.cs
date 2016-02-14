@@ -6,7 +6,10 @@ namespace Rubberduck.Winforms.DataAnnotations
 {
     public class Label : Forms.Label
     {
-        private new const int DefaultPadding = 0;
+        /// <summary>
+        /// Default padding around the Label in Pixels.
+        /// </summary>
+        public new const int DefaultPadding = 0;
 
         public static Label For(Forms.Control control)
         {
@@ -49,6 +52,7 @@ namespace Rubberduck.Winforms.DataAnnotations
                     label.Location = new Point(control.Width + control.Location.X + padding, control.Location.Y);
                     break;
                 case Alignment.Left:
+                    // todo: I'm not real sure how to go about making sure the label doesn't overlap with the control
                     throw new NotSupportedException("We've not added support for Left alignment yet.");
             }
         }

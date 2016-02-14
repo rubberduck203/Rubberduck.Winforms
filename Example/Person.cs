@@ -8,6 +8,7 @@ namespace Example
     {
         private string _firstName;
         private string _lastName;
+        private int _age;
 
         public Person()
         {
@@ -38,6 +39,17 @@ namespace Example
             {
                 _lastName = value;
                 InvokePropertyChanged("LastName");
+            }
+        }
+
+        [Range(18, 150)]
+        public int Age
+        {
+            get { return _age; }
+            set
+            {
+                _age = value;
+                InvokePropertyChanged("Age");
             }
         }
 
