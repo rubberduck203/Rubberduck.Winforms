@@ -115,11 +115,12 @@ It enables you to:
   
   There's a full working example project in the [Example directory](https://github.com/ckuhn203/Rubberduck.Winforms/tree/master/Example).
 
-  ## Building for Release
+## Building for Release
 
-  From Command Prompt 
-	1. cd into ~\Rubberduck.Winforms
-	2. nuget pack Rubberduck.Winforms.csproj -Prop Configuration=Release -build
+From Command Prompt 
+  
+  1. cd into ~\Rubberduck.Winforms
+  2. `nuget pack Rubberduck.Winforms.csproj -Prop Configuration=Release -build`
   
 
   
