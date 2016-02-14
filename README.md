@@ -24,8 +24,16 @@ It enables you to:
   
 ## Installing
 
-  TODO - Create Nuget Package and place instructions here
-  
+  1. From the Nuget Package Manager Console, run the following command.
+	 
+	 ```
+     Install-Package Rubberduck.Winforms
+	 ```
+
+  2. Search for "Rubberduck.Winforms" in the Package Manager and add it from there.
+  3. Download the [latest release](https://github.com/ckuhn203/Rubberduck.Winforms/releases) from GitHub and simply copy the Rubberduck.Winforms.dll file into your project and add a reference to it.
+
+
 ## QuickStart
 
   First, define your Model class and [use DataAnnotations in the normal way][annotations]. Note that your model must [implement INotifyPropertyChanged][INotifyPropertyChanged] in order for the data binding to work correctly. 
@@ -106,6 +114,12 @@ It enables you to:
   ![example ModelBoundForm](http://i.imgur.com/0wl4l4h.png)
   
   There's a full working example project in the [Example directory](https://github.com/ckuhn203/Rubberduck.Winforms/tree/master/Example).
+
+  ## Building for Release
+
+  From Command Prompt 
+	1. cd into ~\Rubberduck.Winforms
+	2. nuget pack Rubberduck.Winforms.csproj -Prop Configuration=Release -build
   
 
   
