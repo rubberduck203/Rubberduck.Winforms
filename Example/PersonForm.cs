@@ -1,5 +1,5 @@
 ﻿using System;
-using Rubberduck.Winforms.DataAnnotations;
+using Rubberduck.Winforms;
 
 namespace Example
 {

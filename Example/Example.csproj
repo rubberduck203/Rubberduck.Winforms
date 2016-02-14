@@ -87,9 +87,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rubberduck.Winforms.DataAnnotations\Rubberduck.Winforms.DataAnnotations.csproj">
+    <ProjectReference Include="..\Rubberduck.Winforms\Rubberduck.Winforms.csproj">
       <Project>{6d126e23-b24e-48a5-98a9-c3a006d93df9}</Project>
-      <Name>Rubberduck.Winforms.DataAnnotations</Name>
+      <Name>Rubberduck.Winforms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

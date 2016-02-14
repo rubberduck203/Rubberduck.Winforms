@@ -1,4 +1,4 @@
-﻿namespace Rubberduck.Winforms.DataAnnotations
+﻿namespace Rubberduck.Winforms
 {
     partial class ModelBoundForm
     {

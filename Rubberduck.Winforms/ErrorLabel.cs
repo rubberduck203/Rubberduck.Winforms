@@ -1,7 +1,7 @@
 using System.Drawing;
 using Forms = System.Windows.Forms;
 
-namespace Rubberduck.Winforms.DataAnnotations
+namespace Rubberduck.Winforms
 {
     public class ErrorLabel : Label
     {

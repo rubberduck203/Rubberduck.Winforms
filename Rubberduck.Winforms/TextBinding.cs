@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace Rubberduck.Winforms.DataAnnotations
+namespace Rubberduck.Winforms
 {
     public class TextBinding : Binding
     {

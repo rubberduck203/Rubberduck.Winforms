@@ -43,7 +43,7 @@
             // 
             // SubmitButton
             // 
-            this.SubmitButton.Location = new System.Drawing.Point(607, 372);
+            this.SubmitButton.Location = new System.Drawing.Point(278, 336);
             this.SubmitButton.Name = "SubmitButton";
             this.SubmitButton.Size = new System.Drawing.Size(75, 23);
             this.SubmitButton.TabIndex = 2;
@@ -93,7 +93,7 @@
             // PersonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(870, 443);
+            this.ClientSize = new System.Drawing.Size(505, 435);
             this.Controls.Add(this.AgeInput);
             this.Controls.Add(this.LastNameInput);
             this.Controls.Add(this.SubmitButton);

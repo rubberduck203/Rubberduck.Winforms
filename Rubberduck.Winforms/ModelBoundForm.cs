@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace Rubberduck.Winforms.DataAnnotations
+namespace Rubberduck.Winforms
 {
     public partial class ModelBoundForm : Form
     {
