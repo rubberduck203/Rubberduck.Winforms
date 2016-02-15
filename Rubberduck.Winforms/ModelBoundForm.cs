@@ -38,7 +38,7 @@ namespace Rubberduck.Winforms
             Controls.Add(errorLabel);
 
             //todo: I don't care for this much. Add support for other types of input
-            errorLabel.Control.Validating += (sender, args) => ValidateControl(errorLabel.Control, "Text");
+            errorLabel.Control.Validating += (sender, args) => args.Cancel = !ValidateControl(errorLabel.Control, "Text");
         }
 
         /// <summary>
@@ -90,14 +90,12 @@ namespace Rubberduck.Winforms
             }
 
             string boundField = GetBoundField(control, controlProperty);
-            var context = new ValidationContext(this.Model, null, null) { MemberName = boundField };
-
-            object propertyValue = this.Model.GetType().InvokeMember(boundField, BindingFlags.GetProperty, null, this.Model, null);
 
             var validationResults = new List<ValidationResult>();
-            Validator.TryValidateProperty(propertyValue, context, validationResults);
 
-            var validation = validationResults.FirstOrDefault();
+            Validator.TryValidateObject(this.Model, new ValidationContext(this.Model, null, null), validationResults, validateAllProperties: true);
+
+            var validation = validationResults.FirstOrDefault(v => v.MemberNames.Contains(boundField));
 
             if (validation == null)
             {

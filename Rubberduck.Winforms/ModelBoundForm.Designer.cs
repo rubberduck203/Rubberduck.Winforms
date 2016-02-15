@@ -29,17 +29,16 @@
         private void InitializeComponent()
         {
             this.SuspendLayout();
-
             // 
-            // Form1
+            // ModelBoundForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(870, 443);
-            this.Name = "ModelBoundForm1";
+            this.Name = "ModelBoundForm";
             this.Text = "ModelBoundForm1";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
