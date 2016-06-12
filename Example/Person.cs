@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Example
 {
-    public class Person : INotifyPropertyChanged
+    public class Person : INotifyPropertyChanged, IValidatableObject
     {
         private string _firstName;
         private string _lastName;
@@ -60,6 +61,14 @@ namespace Example
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (FirstName == LastName)
+            {
+                yield return new ValidationResult("First and Last Name must be different.", new[] { "FirstName", "LastName" });
             }
         }
     }
