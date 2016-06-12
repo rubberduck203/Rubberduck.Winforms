@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ckuhn203/Rubberduck.Winforms</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Inital Release</releaseNotes>
+    <releaseNotes>Added IValidatableObject support.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>DataAnnotations Winforms</tags>
   </metadata>

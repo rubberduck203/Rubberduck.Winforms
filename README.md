@@ -115,6 +115,27 @@ It enables you to:
   
   There's a full working example project in the [Example directory](https://github.com/ckuhn203/Rubberduck.Winforms/tree/master/Example).
 
+## IValidatableObject
+
+Sometimes, you'll want to validate that some of the Model's properties don't conflict.
+Rubberduck.Winforms now supports this via the [`IValidatableObject` interface](https://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.ivalidatableobject(v=vs.110).aspx).
+
+    public class Person : INotifyPropertyChanged, IValidatableObject
+    {
+	    //...
+
+		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (FirstName == LastName)
+            {
+                yield return new ValidationResult("First and Last Name must be different.", new[] { "FirstName", "LastName" });
+            }
+        }
+	}
+
+Note that you *must* supply member names in order for the validation errors to display properly.
+Rubberduck.Winforms doens't yet supply any kind of Summary field. It simply finds the proper `ErrorLabel` for each Model property listed in the `ValidationResult` for display.
+
 ## Building for Release
 
 From Command Prompt 
