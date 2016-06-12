@@ -21,6 +21,8 @@ namespace Rubberduck.Winforms
             this.Model = model;
         }
 
+        public ErrorLabel ValidationSummary { get; }
+
         private readonly Dictionary<string, ErrorLabel> _errorLabels = new Dictionary<string, ErrorLabel>();
 
         /// <summary>
@@ -51,13 +53,13 @@ namespace Rubberduck.Winforms
 
             //todo: again, add support for other types of input
             var boundField = GetBoundField(label.Control, "Text");
-                
+
             var attribute = this.Model.GetType()
                 .GetProperty(boundField)
                 .GetCustomAttributes(typeof(DisplayAttribute), false)
                 .FirstOrDefault();
 
-            label.Text = (attribute == null) ? boundField : ((DisplayAttribute) attribute).Name;
+            label.Text = (attribute == null) ? boundField : ((DisplayAttribute)attribute).Name;
         }
 
         /// <summary>
@@ -107,6 +109,49 @@ namespace Rubberduck.Winforms
             }
 
             errorLabel.Text = validation.ErrorMessage;
+            return false;
+        }
+
+        public override bool ValidateChildren()
+        {
+            if (base.ValidateChildren())
+            {
+                //Individual properties are valid, now validate the object
+                return ValidateModel();
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool ValidateModel()
+        {
+            var context = new ValidationContext(this.Model, null, null);
+
+            var validationResults = new List<ValidationResult>();
+            Validator.TryValidateObject(this.Model, context, validationResults);
+
+            if (!validationResults.Any())
+            {
+                return true;
+            }
+
+            foreach (var result in validationResults)
+            {
+                foreach (var errorLabel in _errorLabels.Values)
+                {
+                    foreach(var memberName in result.MemberNames)
+                    {
+                        var boundField = GetBoundField(errorLabel.Control, "Text");
+                        if (boundField == memberName)
+                        {
+                            errorLabel.Text = result.ErrorMessage;
+                        }
+                    }
+                }
+            }
+
             return false;
         }
 
