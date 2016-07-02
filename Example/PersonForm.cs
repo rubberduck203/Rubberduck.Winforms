@@ -26,7 +26,10 @@ namespace Example
             //Put the label to the right of the input control.
             Register(Label.For(AgeInput, Alignment.Right)); 
             //Put the validation message under the control, with a little extra padding.
-            Register(ErrorLabel.For(AgeInput, Alignment.Bottom, ErrorLabel.DefaultPadding + 5)); 
+            Register(ErrorLabel.For(AgeInput, Alignment.Bottom, ErrorLabel.DefaultPadding + 5));
+
+            //Register HelloCommand
+            this.SayHelloCmdButton.Command = new SayHelloCommand();
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)

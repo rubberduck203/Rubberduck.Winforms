@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.FirstNameInput = new System.Windows.Forms.TextBox();
             this.SubmitButton = new System.Windows.Forms.Button();
             this.LastNameInput = new System.Windows.Forms.TextBox();
             this.AgeInput = new System.Windows.Forms.ComboBox();
+            this.SayHelloCmdButton = new Rubberduck.Winforms.CommandButton();
+            this.personBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // FirstNameInput
@@ -90,15 +94,32 @@
             this.AgeInput.Size = new System.Drawing.Size(121, 21);
             this.AgeInput.TabIndex = 4;
             // 
+            // SayHelloCmdButton
+            // 
+            this.SayHelloCmdButton.Command = null;
+            this.SayHelloCmdButton.CommandParameter = null;
+            this.SayHelloCmdButton.Location = new System.Drawing.Point(290, 73);
+            this.SayHelloCmdButton.Name = "SayHelloCmdButton";
+            this.SayHelloCmdButton.Size = new System.Drawing.Size(75, 23);
+            this.SayHelloCmdButton.TabIndex = 5;
+            this.SayHelloCmdButton.Text = "SayHello";
+            this.SayHelloCmdButton.UseVisualStyleBackColor = true;
+            // 
+            // personBindingSource
+            // 
+            this.personBindingSource.DataSource = typeof(Example.Person);
+            // 
             // PersonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(505, 435);
+            this.Controls.Add(this.SayHelloCmdButton);
             this.Controls.Add(this.AgeInput);
             this.Controls.Add(this.LastNameInput);
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.FirstNameInput);
             this.Name = "PersonForm";
+            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,5 +131,7 @@
         private System.Windows.Forms.Button SubmitButton;
         private System.Windows.Forms.TextBox LastNameInput;
         private System.Windows.Forms.ComboBox AgeInput;
+        private Rubberduck.Winforms.CommandButton SayHelloCmdButton;
+        private System.Windows.Forms.BindingSource personBindingSource;
     }
 }
