@@ -21,6 +21,15 @@ namespace Rubberduck.Winforms
             this.Model = model;
         }
 
+        private void OnLoaded(object sender, EventArgs e)
+        {
+            // have to wait for child forms to load before their controls are available.
+            foreach (var cmdButton in this.Controls.OfType<CommandButton>())
+            {
+                cmdButton.Click += OnCommandButtonClick;
+            }
+        }
+
         public ErrorLabel ValidationSummary { get; }
 
         private readonly Dictionary<string, ErrorLabel> _errorLabels = new Dictionary<string, ErrorLabel>();
@@ -181,6 +190,23 @@ namespace Rubberduck.Winforms
             }
 
             return binding.BindingMemberInfo.BindingField;
+        }
+
+        private void OnCommandButtonClick(object sender, EventArgs e)
+        {
+            if (!this.ValidateChildren())
+            {
+                return;
+            }
+
+            var cmdButton = sender as CommandButton;
+            var command = cmdButton.Command;
+            var param = cmdButton.CommandParameter;
+
+            if (command != null && command.CanExecute(param))
+            {
+                command.Execute(param);
+            }
         }
     }
 }

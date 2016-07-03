@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.FirstNameInput = new System.Windows.Forms.TextBox();
-            this.SubmitButton = new System.Windows.Forms.Button();
             this.LastNameInput = new System.Windows.Forms.TextBox();
             this.AgeInput = new System.Windows.Forms.ComboBox();
             this.SayHelloCmdButton = new Rubberduck.Winforms.CommandButton();
@@ -44,16 +43,6 @@
             this.FirstNameInput.Name = "FirstNameInput";
             this.FirstNameInput.Size = new System.Drawing.Size(100, 20);
             this.FirstNameInput.TabIndex = 1;
-            // 
-            // SubmitButton
-            // 
-            this.SubmitButton.Location = new System.Drawing.Point(278, 336);
-            this.SubmitButton.Name = "SubmitButton";
-            this.SubmitButton.Size = new System.Drawing.Size(75, 23);
-            this.SubmitButton.TabIndex = 2;
-            this.SubmitButton.Text = "Submit";
-            this.SubmitButton.UseVisualStyleBackColor = true;
-            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // LastNameInput
             // 
@@ -98,7 +87,7 @@
             // 
             this.SayHelloCmdButton.Command = null;
             this.SayHelloCmdButton.CommandParameter = null;
-            this.SayHelloCmdButton.Location = new System.Drawing.Point(290, 73);
+            this.SayHelloCmdButton.Location = new System.Drawing.Point(337, 307);
             this.SayHelloCmdButton.Name = "SayHelloCmdButton";
             this.SayHelloCmdButton.Size = new System.Drawing.Size(75, 23);
             this.SayHelloCmdButton.TabIndex = 5;
@@ -116,7 +105,6 @@
             this.Controls.Add(this.SayHelloCmdButton);
             this.Controls.Add(this.AgeInput);
             this.Controls.Add(this.LastNameInput);
-            this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.FirstNameInput);
             this.Name = "PersonForm";
             ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
@@ -128,7 +116,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox FirstNameInput;
-        private System.Windows.Forms.Button SubmitButton;
         private System.Windows.Forms.TextBox LastNameInput;
         private System.Windows.Forms.ComboBox AgeInput;
         private Rubberduck.Winforms.CommandButton SayHelloCmdButton;

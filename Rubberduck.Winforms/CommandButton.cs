@@ -37,22 +37,6 @@ namespace Rubberduck.Winforms
 
         protected void OnCanExecuteChanged(object sender, EventArgs e)
         {
-            SetEnabledState();
-        }
-
-        protected override void OnClick(EventArgs e)
-        {
-            if (Command != null && Command.CanExecute(CommandParameter))
-            {
-                Command.Execute(CommandParameter);
-                SetEnabledState();
-            }
-
-            base.OnClick(e);
-        }
-
-        private void SetEnabledState()
-        {
             this.Enabled = Command.CanExecute(CommandParameter);
         }
     }

@@ -10,17 +10,16 @@ namespace Example
     {
         public event EventHandler CanExecuteChanged;
 
-        private int count;
-
         public bool CanExecute(object parameter)
         {
-            count++;
-            return count % 2 == 0;
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            var message = (parameter as string ?? "Hello Ducky!");
+            var person = parameter as Person;
+            string message = "Hello " + ((person == null) ? "Ducky" : person.FirstName);
+
             System.Windows.Forms.MessageBox.Show(message);
         }
     }

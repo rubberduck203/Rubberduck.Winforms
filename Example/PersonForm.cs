@@ -30,18 +30,7 @@ namespace Example
 
             //Register HelloCommand
             this.SayHelloCmdButton.Command = new SayHelloCommand();
-        }
-
-        private void SubmitButton_Click(object sender, EventArgs e)
-        {
-            if (this.ValidateChildren())
-            {
-                var handler = Submit;
-                if (handler != null)
-                {
-                    handler(sender, e);
-                }
-            }
+            this.SayHelloCmdButton.CommandParameter = this.Model;
         }
     }
 }
