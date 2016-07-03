@@ -128,10 +128,8 @@ namespace Rubberduck.Winforms
                 //Individual properties are valid, now validate the object
                 return ValidateModel();
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         private bool ValidateModel()
@@ -146,11 +144,12 @@ namespace Rubberduck.Winforms
                 return true;
             }
 
+            //todo: find a way to unnest the O(n^3) operation.
             foreach (var result in validationResults)
             {
                 foreach (var errorLabel in _errorLabels.Values)
                 {
-                    foreach(var memberName in result.MemberNames)
+                    foreach (var memberName in result.MemberNames)
                     {
                         var boundField = GetBoundField(errorLabel.Control, "Text");
                         if (boundField == memberName)

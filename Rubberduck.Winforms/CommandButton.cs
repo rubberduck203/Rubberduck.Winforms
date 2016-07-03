@@ -5,6 +5,10 @@ using System.Windows.Input;
 
 namespace Rubberduck.Winforms
 {
+    /// <summary>
+    /// Button that can be bound to an <see cref="ICommand"/>.
+    /// The <see cref="Enabled"/> property is updated based on the results of <see cref="Command.CanExecute"/> any time <see cref="Command.CanExecuteChanged"/> is fired.
+    /// </summary>
     [DefaultBindingProperty("Command")]
     public class CommandButton : Button
     {

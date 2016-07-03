@@ -29,8 +29,10 @@ namespace Example
             Register(ErrorLabel.For(AgeInput, Alignment.Bottom, ErrorLabel.DefaultPadding + 5));
 
             //Register HelloCommand
-            this.SayHelloCmdButton.Command = new SayHelloCommand();
-            this.SayHelloCmdButton.CommandParameter = this.Model;
+            
+            this.SayHelloCmdButton.Command = new SayHelloCommand(this.Model as Person);
+            this.SayHelloCmdButton.DataBindings.Add(new System.Windows.Forms.Binding("CommandParameter", this.LastNameInput, "Text"));
+            //this.SayHelloCmdButton.CommandParameter = "Hola";
         }
     }
 }

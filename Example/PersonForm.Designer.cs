@@ -87,11 +87,12 @@
             // 
             this.SayHelloCmdButton.Command = null;
             this.SayHelloCmdButton.CommandParameter = null;
+            this.SayHelloCmdButton.Enabled = false;
             this.SayHelloCmdButton.Location = new System.Drawing.Point(337, 307);
             this.SayHelloCmdButton.Name = "SayHelloCmdButton";
             this.SayHelloCmdButton.Size = new System.Drawing.Size(75, 23);
             this.SayHelloCmdButton.TabIndex = 5;
-            this.SayHelloCmdButton.Text = "SayHello";
+            this.SayHelloCmdButton.Text = "Say Hello";
             this.SayHelloCmdButton.UseVisualStyleBackColor = true;
             // 
             // personBindingSource
