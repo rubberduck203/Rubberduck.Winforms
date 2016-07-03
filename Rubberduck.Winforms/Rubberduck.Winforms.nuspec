@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ckuhn203/Rubberduck.Winforms</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added IValidatableObject support.</releaseNotes>
+    <releaseNotes>Added ICommand support via the new CommandButton class.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>DataAnnotations Winforms</tags>
   </metadata>
