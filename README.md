@@ -140,7 +140,7 @@ public class Person : INotifyPropertyChanged, IValidatableObject
         }
     }
 }
-```csharp
+```
 
 Note that you *must* supply member names in order for the validation errors to display properly.
 Rubberduck.Winforms doens't yet supply any kind of Summary field. It simply finds the proper `ErrorLabel` for each Model property listed in the `ValidationResult` for display.
